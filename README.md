@@ -1,5 +1,4 @@
 # ansible-demo
-Ansible Playbook Repository
 
 The goal is to deploy SAP Hana to one or more RHEL hosts in a fully automated
 manner.
@@ -43,6 +42,4 @@ use it for my deployment.
 
 
 So I create two YML files, one for the host_vars and another for my playbook and proceed from there.
-
-
 
