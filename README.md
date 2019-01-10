@@ -2,4 +2,4 @@
 Ansible Playbook Repository
 
 
-This is a simple Ansible playbook for demo purposes.
+This repo holds simple Ansible playbook examples for demo purposes.
