@@ -23,6 +23,7 @@ Searching for keyword SAP in the Ansible Galaxy reveals there is indeed a lot
 of prior art available. I decide to use the saphana-deploy role for my purpose.
 
 To simply use that role I need to install it on my management workstation via
+
 ```ansible-galaxy install mk-ansible-roles.saphana-deploy```
 
 There is also a ReadMe attached to the role that describes what I need to do
@@ -63,16 +64,16 @@ that make up my phased deployment process:
 
 
 After committing and pushing the new content I create a new Project in Ansible
-Tower that references my GIT repo. I use the **Update Revision on Launch**
+Tower that references my GIT repo. I use the *Update Revision on Launch*
 option to make shure I always have the most current version of my playbooks and
 group_vars applied.
 
 Next I create new Run type Job Templates in Ansible Tower to get access to my just created playbooks:
 
-* **Liveliness Check** checks if the target is alive using 'check_alive.yml'
-* **Prepare RHEL**  performs the basic OS level steps to prepare the HANA installation using 'prepare_system.yml'
+* **Liveliness Check** checks if the target is alive using ```check_alive.yml```
+* **Prepare RHEL**  performs the basic OS level steps to prepare the HANA installation using ```prepare_system.yml```
   This Template needs to have Privilege Escalation enabled.
-* **App Deployment** actually deploys the HANA DB using **deploy_hana.yml**
+* **App Deployment** actually deploys the HANA DB using ```deploy_hana.yml```
   This Template also need Privilege Escalation to be enabled.
 
 Finally I create a Workflow Template **Roll That Thing** that combines the
@@ -80,8 +81,8 @@ above declared Job Templates into one Workflow to Rollout the HANA Database.
 
 For that Workflow Template I add Survey to allow the end user to adjust certain parameters upon HANA creation:
 
-* **HANA SID** is a 3 alnum text string to identify the instance (defaults to **HXE**)
-* **HANA Instance Number** is a 2 digit text (defaults to **75**)
+* **HANA SID** is a 3 alnum text string to identify the instance (defaults to *HXE*)
+* **HANA Instance Number** is a 2 digit text (defaults to *75*)
 
 I enable Concurrent Jobs for that Workflow and start the App Deployment only
 after successful RHEL preparation. The Liveliness Check is performed three
