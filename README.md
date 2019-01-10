@@ -79,10 +79,10 @@ Next I create new Run type Job Templates in Ansible Tower to get access to my ju
 Finally I create a Workflow Template **Roll That Thing** that combines the
 above declared Job Templates into one Workflow to Rollout the HANA Database.
 
-For that Workflow Template I add Survey to allow the end user to adjust certain parameters upon HANA creation:
+For that Workflow Template I add a Survey to allow the end user to adjust certain parameters upon HANA creation:
 
-* **HANA SID** is a 3 alnum text string to identify the instance (defaults to *HXE*)
-* **HANA Instance Number** is a 2 digit text (defaults to *75*)
+* **HANA SID** is a 3 alnum text string stored in variable named *hana_sid* to identify the instance (defaults to *HXE*)
+* **HANA Instance Number** is a 2 digit text stored in a variable named *hana_instance_number* (defaults to *75*)
 
 I enable Concurrent Jobs for that Workflow and start the App Deployment only
 after successful RHEL preparation. The Liveliness Check is performed three
