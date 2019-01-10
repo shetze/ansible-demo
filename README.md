@@ -23,13 +23,14 @@ Searching for keyword SAP in the Ansible Galaxy reveals there is indeed a lot
 of prior art available. I decide to use the saphana-deploy role for my purpose.
 
 To simply use that role I need to install it on my management workstation via
-'''ansible-galaxy install mk-ansible-roles.saphana-deploy'''
+```ansible-galaxy install mk-ansible-roles.saphana-deploy```
 
-There is also a ReadMe attachted to the role that describes what I need to do
+There is also a ReadMe attached to the role that describes what I need to do
 in order to facilitate it.
 
 Additional information may be found in the original source which is hosted on
-GitHub.  There is a button that links directly into that GitHub repo.
+GitHub.  There is a button that links directly into that
+[saphana-deploy GitHub repo](https://github.com/mk-ansible-roles/saphana-deploy).
 
 If I am not satisfied with the role as it is, I may simply clone that GitHub
 repo and make my changes. I then may issue a pull request to the original
@@ -42,7 +43,8 @@ But wait, in most cases, the application developers need to deploy their new
 stuff frequently and they usually do that in a fully automated fashion. Chances
 are, that there exist well tested and maintained Ansible playbooks stored
 alongide with the original code for the application somewhere in the
-development department.
+development department. This is how Development and Operations grow closer,
+whether or not you like to call it DevOps.
 
 ### Stitching the Pieces Together
 
