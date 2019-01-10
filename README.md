@@ -52,7 +52,7 @@ Anyway, for the moment I am satisfied with the role as it is and just want to
 use it for my deployment.
 
 In fact, additionally to the saphana-deploy role I decide to use four more roles
-to design a modular deployment workflow with a high degree of re-usability.
+to design a modular deployment workflow with a high degree of re-usability: [disk-init](https://github.com/mk-ansible-roles/disk-init), [subscribe-rhn](https://github.com/mk-ansible-roles/subscribe-rhn), [saphana-preconfigure](https://github.com/mk-ansible-roles/saphana-preconfigure) and the OS role timesync as provided by Red Hat.
 
 So I create four YML files, one for the group_vars and the another for my playbooks
 that make up my phased deployment process:
@@ -63,16 +63,16 @@ that make up my phased deployment process:
 
 
 After committing and pushing the new content I create a new Project in Ansible
-Tower that references my GIT repo. I use the /*Update Revision on Launch*/
+Tower that references my GIT repo. I use the **Update Revision on Launch**
 option to make shure I always have the most current version of my playbooks and
 group_vars applied.
 
 Next I create new Run type Job Templates in Ansible Tower to get access to my just created playbooks:
 
-* **Liveliness Check** checks if the target is alive using /*check_alive.yml*/
-* **Prepare RHEL**  performs the basic OS level steps to prepare the HANA installation using /*prepare_system.yml*/
+* **Liveliness Check** checks if the target is alive using 'check_alive.yml'
+* **Prepare RHEL**  performs the basic OS level steps to prepare the HANA installation using 'prepare_system.yml'
   This Template needs to have Privilege Escalation enabled.
-* **App Deployment** actually deploys the HANA DB using /*deploy_hana.yml*/
+* **App Deployment** actually deploys the HANA DB using **deploy_hana.yml**
   This Template also need Privilege Escalation to be enabled.
 
 Finally I create a Workflow Template **Roll That Thing** that combines the
@@ -80,8 +80,8 @@ above declared Job Templates into one Workflow to Rollout the HANA Database.
 
 For that Workflow Template I add Survey to allow the end user to adjust certain parameters upon HANA creation:
 
-* **HANA SID** is a 3 alnum text string to identify the instance (defaults to /*HXE*/)
-* **HANA Instance Number** is a 2 digit text (defaults to /*75*/)
+* **HANA SID** is a 3 alnum text string to identify the instance (defaults to **HXE**)
+* **HANA Instance Number** is a 2 digit text (defaults to **75**)
 
 I enable Concurrent Jobs for that Workflow and start the App Deployment only
 after successful RHEL preparation. The Liveliness Check is performed three
@@ -89,7 +89,7 @@ times in a row in parallel to the other tasks for demoing purposes.
 
 ## Use Case 2: End User Perspective
 
-In order to demonstrate End User Perspective in Ansible Tower, I create a new Team /*class0815*/ with permissions to execute the **Roll Out That Thing** Template.
+In order to demonstrate End User Perspective in Ansible Tower, I create a new Team **class0815** with permissions to execute the **Roll Out That Thing** Template.
 
 A new user is created and assigned to that team as a member.
 
