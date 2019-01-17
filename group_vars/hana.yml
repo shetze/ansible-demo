@@ -1,4 +1,27 @@
 ---
+### Subscription
+
+satellite_server: satellite.example.com
+reg_activation_key: sap-hana
+reg_organization_id: RHPDS_Demo
+reg_server_insecure: yes
+reg_osrelease: 7.4
+repo_reset: true
+repositories:
+        - rhel-7-server-e4s-rpms
+        - rhel-sap-hana-for-rhel-7-server-e4s-rpms
+
+### Time synchronization
+ntp_servers:
+        - hostname: 0.rhel.pool.ntp.org
+          iburst: yes
+        - hostname: 1.rhel.pool.ntp.org
+          iburst: yes
+        - hostname: 2.rhel.pool.ntp.org
+          iburst: yes
+        - hostname: 3.rhel.pool.ntp.org
+          iburst: yes
+
 ### Disk Configuration
 disks:
         /dev/vdb: vg00
@@ -20,8 +43,22 @@ logvols:
                 vol: vg00
                 mountpoint: /usr/sap
 
+### HANA Installation Package Distribution
+install_nfs: "tower.example.com:/export"
+installroot: /install/hxe
+installversion: "HANA_EXPRESS_20"
+hana_installdir: "{{ installroot + '/' + installversion }}"
+
+### HANA Deployment
 hostname: "{{ ansible_hostname }}"
 deployment_instance: true
+
+hana_pw_hostagent_ssl: "MyS3cret!"
+id_user_sapadm: "30200"
+id_group_shm: "30220"
+id_group_sapsys: "30200"
+pw_user_sapadm_clear: "MyS3cret!"
+
 
 instances:
   inst01:
